@@ -11,8 +11,7 @@ import javax.swing.JComboBox;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.text.DateFormatSymbols;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -60,32 +59,47 @@ public class Order {
 	private void initialize() {
 		String boxSize[]={"Mini","S","M","L","XL"};
 		String statement_box_data ="select * from box";
-		String statement_transporting ="select id form transport";
-		DB db = new DB();
-		ResultSet rs = db.query(statement_transporting);
-		try {
-			System.out.println(rs.getInt("id"));
-		} catch (SQLException throwables) {
-			throwables.printStackTrace();
+		String statement_transporting ="select MAX(transport_id) from transport";
+		Connection con = null;
+		Statement st;
+		ResultSet rs=null;
+		int last_id;
+		try{
+			try{
+				Class.forName("com.mysql.jdbc.Driver");
+				con = DriverManager.getConnection("jdbc:mysql://localhost/OOPExpress","root","");
+				st = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
+				if(con!=null){
+					System.out.println("Connected");
+					rs=st.executeQuery("select max(height) as max from box;");
+					last_id = rs.getInt("height");
+				}
+
+			}catch (SQLException sqle){
+				sqle.printStackTrace();
+			}
+		}catch(Exception e){
+			e.printStackTrace();
 		}
+
 
 
 		frame = new JFrame();
 		frame.setBounds(100, 100, 800, 660);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		
+
 		JLabel lblOopExpress = new JLabel("OOP EXPRESS");
 		lblOopExpress.setFont(new Font("Tahoma", Font.BOLD, 16));
 		lblOopExpress.setBounds(299, 10, 126, 40);
 		frame.getContentPane().add(lblOopExpress);
-		
+
 		t_id = new JTextField();
 		t_id.setEditable(false);
 		t_id.setBounds(150, 64, 113, 29);
 		frame.getContentPane().add(t_id);
 		t_id.setColumns(10);
-		
+
 		JLabel lblSender = new JLabel("Sender Name");
 		lblSender.setBounds(39, 152, 114, 14);
 		frame.getContentPane().add(lblSender);
@@ -212,6 +226,10 @@ public class Order {
 		
 		JButton btnQuit = new JButton("Quit");
 		btnQuit.setBounds(663, 555, 77, 23);
+		btnQuit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		frame.getContentPane().add(btnQuit);
 		
 		JLabel lblId = new JLabel("ID");
