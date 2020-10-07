@@ -1,7 +1,4 @@
-package Express;
-
-import javax.swing.*;
-import java.util.Scanner;
+package EXPRESS;
 
 public class Express {
     public static void main(String args[]){
