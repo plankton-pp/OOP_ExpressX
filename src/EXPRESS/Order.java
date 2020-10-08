@@ -320,10 +320,30 @@ public class Order {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						switch (cb_boxSize.getSelectedItem().toString()){
-							case "S":
-								t_volume.setText("Box Size: "+width[size.indexOf(cb_boxSize.getSelectedItem().toString())]+"x"+height[size.indexOf(cb_boxSize.getSelectedItem().toString())]+"x"+depth[size.indexOf(cb_boxSize.getSelectedItem().toString())]);break;
+							case "Mini":t_volume.setText("Box Size: "+width[size.indexOf(cb_boxSize.getSelectedItem().toString().toLowerCase())]+"x"
+									+height[size.indexOf(cb_boxSize.getSelectedItem().toString().toLowerCase())]
+									+"x"+depth[size.indexOf(cb_boxSize.getSelectedItem().toString().toLowerCase())]);break;
+							case "S":t_volume.setText("Box Size: "+width[size.indexOf(cb_boxSize.getSelectedItem().toString().toLowerCase())]+"x"
+									+height[size.indexOf(cb_boxSize.getSelectedItem().toString().toLowerCase())]
+									+"x"+depth[size.indexOf(cb_boxSize.getSelectedItem().toString().toLowerCase())]);break;
+							case "M":t_volume.setText("Box Size: "+width[size.indexOf(cb_boxSize.getSelectedItem().toString().toLowerCase())]+"x"
+									+height[size.indexOf(cb_boxSize.getSelectedItem().toString().toLowerCase())]
+									+"x"+depth[size.indexOf(cb_boxSize.getSelectedItem().toString().toLowerCase())]);break;
+							case "L":t_volume.setText("Box Size: "+width[size.indexOf(cb_boxSize.getSelectedItem().toString().toLowerCase())]+"x"
+									+height[size.indexOf(cb_boxSize.getSelectedItem().toString().toLowerCase())]
+									+"x"+depth[size.indexOf(cb_boxSize.getSelectedItem().toString().toLowerCase())]);break;
+							case "XL":t_volume.setText("Box Size: "+width[size.indexOf(cb_boxSize.getSelectedItem().toString().toLowerCase())]+"x"
+									+height[size.indexOf(cb_boxSize.getSelectedItem().toString().toLowerCase())]
+									+"x"+depth[size.indexOf(cb_boxSize.getSelectedItem().toString().toLowerCase())]);break;
 							default:break;
 						}
+					}
+				});
+
+				t_weight.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						t_price.setText(t_weight.getText()+":+150฿");
 					}
 				});
 
