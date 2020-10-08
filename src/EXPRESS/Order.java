@@ -25,6 +25,8 @@ public class Order {
 	private JTextField t_receiverAddress;
 	private JTextField t_receiverTel;
 	private JTextField t_volume;
+	private JTextField t_weight;
+	private JTextField t_price;
 
 
 
@@ -198,6 +200,10 @@ public class Order {
 						t_receiverAddress.setText("");
 						t_receiverTel.setText("");
 
+						cb_boxSize.setSelectedIndex(0);
+						t_volume.setText("");
+						t_price.setText("");
+
 						t_id.setText(String.format("%d",Integer.parseInt(t_id.getText())));
 					}
 				});
@@ -210,7 +216,11 @@ public class Order {
 				t_volume.setBounds(534, 325, 113, 29);
 				frame.getContentPane().add(t_volume);
 
-				JTextField t_weight = new JTextField();
+				JLabel t_unit = new JLabel("inches");
+				t_unit.setBounds(670, 325, 113, 29);
+				frame.getContentPane().add(t_unit);
+
+				t_weight = new JTextField();
 				t_weight.setColumns(10);
 				t_weight.setBounds(534, 364, 113, 29);
 				frame.getContentPane().add(t_weight);
@@ -224,7 +234,7 @@ public class Order {
 				lblWeight.setBounds(475, 373, 45, 14);
 				frame.getContentPane().add(lblWeight);
 
-				JTextField t_price = new JTextField();
+				t_price = new JTextField();
 				t_price.setColumns(10);
 				t_price.setEditable(false);
 				t_price.setBounds(534, 404, 113, 27);
@@ -237,32 +247,52 @@ public class Order {
 				JButton btnAdd = new JButton("Add");
 				btnAdd.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						String data[]={t_id.getText(),t_senderName.getText(),t_senderAddress.getText(),t_senderTel.getText()
-								, t_receiverName.getText(), t_receiverAddress.getText(), t_receiverTel.getText()};
-						DB db = new DB();
-						int object = JOptionPane.showConfirmDialog(frame,"Affected 1 row with ID: "+t_id.getText(),"Alert",JOptionPane.OK_CANCEL_OPTION);
-						if(object == JOptionPane.OK_OPTION){
-							db.insert(data);
-							t_senderName.setText("");
-							t_senderAddress.setText("");
-							t_senderTel.setText("");
+						//Check Price
+							if(t_price.getText()==""){
+								JOptionPane.showMessageDialog(frame,"Invalid Size of Box","Warning",JOptionPane.WARNING_MESSAGE);
+							}
+							//Check Sender Information
+							if(t_senderName.getText()==""||t_senderAddress.getText()==""||t_senderTel.getText()==""){
+								JOptionPane.showMessageDialog(frame,"Invalid of Sender Informantion","Warning",JOptionPane.WARNING_MESSAGE);
+							}
+							//Check Receiver Infomation
+							if(t_receiverName.getText()=="" ||t_receiverAddress.getText()==""||t_receiverTel.getText()==""){
+								JOptionPane.showMessageDialog(frame,"Invalid of Sender Informantion","Warning",JOptionPane.WARNING_MESSAGE);
+							}
+							else{
 
-							t_receiverName.setText("");
-							t_receiverAddress.setText("");
-							t_receiverTel.setText("");
+								//Data from FORM for Insert on DATABASE
+								String data[]={t_id.getText(),t_senderName.getText(),t_senderAddress.getText(),t_senderTel.getText()
+										, t_receiverName.getText(), t_receiverAddress.getText(), t_receiverTel.getText()};
+								//Create Instance of DB Class
+								DB db = new DB();
+								//If Insertion were "Successfull" alert msg
+								int object = JOptionPane.showConfirmDialog(frame,"Insertion Confirm","Warning",JOptionPane.OK_CANCEL_OPTION);
+								//Insert
+								if(object == JOptionPane.OK_OPTION){
+									db.insert(data);
+									t_senderName.setText("");
+									t_senderAddress.setText("");
+									t_senderTel.setText("");
 
-							t_id.setText(String.format("%d",Integer.parseInt(t_id.getText())+1));
-						}else if(object == JOptionPane.CANCEL_OPTION){
-							t_senderName.setText("");
-							t_senderAddress.setText("");
-							t_senderTel.setText("");
+									t_receiverName.setText("");
+									t_receiverAddress.setText("");
+									t_receiverTel.setText("");
 
-							t_receiverName.setText("");
-							t_receiverAddress.setText("");
-							t_receiverTel.setText("");
+									t_id.setText(String.format("%d",Integer.parseInt(t_id.getText())+1));
+								}else if(object == JOptionPane.CANCEL_OPTION){
+									t_senderName.setText("");
+									t_senderAddress.setText("");
+									t_senderTel.setText("");
 
-							t_id.setText(String.format("%d",Integer.parseInt(t_id.getText())));
-						}
+									t_receiverName.setText("");
+									t_receiverAddress.setText("");
+									t_receiverTel.setText("");
+
+									t_id.setText(String.format("%d",Integer.parseInt(t_id.getText())));
+								}
+							}
+
 					}
 				});
 
@@ -294,7 +324,6 @@ public class Order {
 
 				JButton btnCalculate = new JButton("Calculate");
 				btnCalculate.setBounds(655, 364, 100, 21);
-				frame.getContentPane().add(btnCalculate);
 
 				ResultSet rs2 = null;
 				rs2 = st.executeQuery("select * from box order by width;");
@@ -320,19 +349,19 @@ public class Order {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						switch (cb_boxSize.getSelectedItem().toString()){
-							case "Mini":t_volume.setText("Box Size: "+width[size.indexOf(cb_boxSize.getSelectedItem().toString().toLowerCase())]+"x"
+							case "Mini":t_volume.setText(width[size.indexOf(cb_boxSize.getSelectedItem().toString().toLowerCase())]+"x"
 									+height[size.indexOf(cb_boxSize.getSelectedItem().toString().toLowerCase())]
 									+"x"+depth[size.indexOf(cb_boxSize.getSelectedItem().toString().toLowerCase())]);break;
-							case "S":t_volume.setText("Box Size: "+width[size.indexOf(cb_boxSize.getSelectedItem().toString().toLowerCase())]+"x"
+							case "S":t_volume.setText(width[size.indexOf(cb_boxSize.getSelectedItem().toString().toLowerCase())]+"x"
 									+height[size.indexOf(cb_boxSize.getSelectedItem().toString().toLowerCase())]
 									+"x"+depth[size.indexOf(cb_boxSize.getSelectedItem().toString().toLowerCase())]);break;
-							case "M":t_volume.setText("Box Size: "+width[size.indexOf(cb_boxSize.getSelectedItem().toString().toLowerCase())]+"x"
+							case "M":t_volume.setText(width[size.indexOf(cb_boxSize.getSelectedItem().toString().toLowerCase())]+"x"
 									+height[size.indexOf(cb_boxSize.getSelectedItem().toString().toLowerCase())]
 									+"x"+depth[size.indexOf(cb_boxSize.getSelectedItem().toString().toLowerCase())]);break;
-							case "L":t_volume.setText("Box Size: "+width[size.indexOf(cb_boxSize.getSelectedItem().toString().toLowerCase())]+"x"
+							case "L":t_volume.setText(width[size.indexOf(cb_boxSize.getSelectedItem().toString().toLowerCase())]+"x"
 									+height[size.indexOf(cb_boxSize.getSelectedItem().toString().toLowerCase())]
 									+"x"+depth[size.indexOf(cb_boxSize.getSelectedItem().toString().toLowerCase())]);break;
-							case "XL":t_volume.setText("Box Size: "+width[size.indexOf(cb_boxSize.getSelectedItem().toString().toLowerCase())]+"x"
+							case "XL":t_volume.setText(width[size.indexOf(cb_boxSize.getSelectedItem().toString().toLowerCase())]+"x"
 									+height[size.indexOf(cb_boxSize.getSelectedItem().toString().toLowerCase())]
 									+"x"+depth[size.indexOf(cb_boxSize.getSelectedItem().toString().toLowerCase())]);break;
 							default:break;
