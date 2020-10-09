@@ -189,6 +189,10 @@ public class Order {
 				cb_boxSize.setBounds(534, 285, 113, 30);
 				frame.getContentPane().add(cb_boxSize);
 
+				JComboBox cb_Type = new JComboBox(new String[]{"Normal","Emergency"});
+				cb_Type.setBounds(534, 404, 113, 27);
+				frame.getContentPane().add(cb_Type);
+
 				JButton btnCancle = new JButton("Cancel");
 				btnCancle.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
@@ -231,7 +235,7 @@ public class Order {
 				frame.getContentPane().add(lblVolume);
 
 				JLabel lblbaht = new JLabel("Baht");
-				lblbaht.setBounds(670, 404, 113, 29);
+				lblbaht.setBounds(670, 444, 113, 29);
 				frame.getContentPane().add(lblbaht);
 
 				JLabel lblgram = new JLabel("gram");
@@ -245,11 +249,15 @@ public class Order {
 				t_price = new JTextField();
 				t_price.setColumns(10);
 				t_price.setEditable(false);
-				t_price.setBounds(534, 404, 113, 27);
+				t_price.setBounds(534, 444, 113, 27);
 				frame.getContentPane().add(t_price);
 
+				JLabel lblType = new JLabel("Type");
+				lblType.setBounds(476, 413, 45, 14);
+				frame.getContentPane().add(lblType);
+
 				JLabel lblPrice = new JLabel("Price");
-				lblPrice.setBounds(476, 413, 45, 14);
+				lblPrice.setBounds(476, 443, 45, 14);
 				frame.getContentPane().add(lblPrice);
 
 				JButton btnAdd = new JButton("Add");
@@ -268,32 +276,33 @@ public class Order {
 							if(t_price.getText().equals("")==true){
 								System.out.println("Price <null> : "+t_price.getText());
 								JOptionPane.showMessageDialog(frame,"Invalid Weight !","Warning",JOptionPane.WARNING_MESSAGE);
-							}else{
-								System.out.println("Price <not null> : "+t_price.getText());
-								if(cb_boxSize.getSelectedIndex()==0){
-									JOptionPane.showMessageDialog(frame,"Invalid Size of Box !","Warning",JOptionPane.WARNING_MESSAGE);
-								}else{
+							}else {
+								System.out.println("Price <not null> : " + t_price.getText());
+								if (cb_boxSize.getSelectedIndex() == 0) {
+									JOptionPane.showMessageDialog(frame, "Invalid Size of Box !", "Warning", JOptionPane.WARNING_MESSAGE);
+								} else {
 									//Check Sender Information
-									if(t_senderName.getText().equals("")||t_senderAddress.getText().equals("")||t_senderTel.getText().equals("")){
-										JOptionPane.showMessageDialog(frame,"Invalid of Sender Information","Warning",JOptionPane.WARNING_MESSAGE);
-									}else{
+									if (t_senderName.getText().equals("") || t_senderAddress.getText().equals("") || t_senderTel.getText().equals("")) {
+										JOptionPane.showMessageDialog(frame, "Invalid of Sender Information", "Warning", JOptionPane.WARNING_MESSAGE);
+									} else {
 										//Check Receiver Infomation
-										if(t_receiverName.getText().equals("")||t_receiverAddress.getText().equals("")||t_receiverTel.getText().equals("")){
-											JOptionPane.showMessageDialog(frame,"Invalid of Receiver Information","Warning",JOptionPane.WARNING_MESSAGE);
-										}
-										else{
+										if (t_receiverName.getText().equals("") || t_receiverAddress.getText().equals("") || t_receiverTel.getText().equals("")) {
+											JOptionPane.showMessageDialog(frame, "Invalid of Receiver Information", "Warning", JOptionPane.WARNING_MESSAGE);
+										} else {
 											System.out.println("Complete");
-											String data2[]={t_id.getText(),day+"-"+mon+"-"+year,t_Time.getText(),cb_boxSize.getSelectedItem().toString(),t_volume.getText(),t_weight.getText(),t_price.getText(),t_id.getText()};
+											BoxFac fac = new BoxFac();
+											String data2[] = {day + "-" + mon + "-" + year, t_Time.getText(), t_price.getText()};
 											//Data from FORM for Insert on DATABASE
-											String data[]={t_id.getText(),t_senderName.getText(),t_senderAddress.getText(),t_senderTel.getText()
+											String data[] = {t_id.getText(), t_senderName.getText(), t_senderAddress.getText(), t_senderTel.getText()
 													, t_receiverName.getText(), t_receiverAddress.getText(), t_receiverTel.getText()};
 											//Create Instance of DB Class
 											DB db = new DB();
 											//If Insertion were "Successfull" alert msg
-											int object = JOptionPane.showConfirmDialog(frame,"Insertion Confirm","Warning",JOptionPane.OK_CANCEL_OPTION);
+											int object = JOptionPane.showConfirmDialog(frame, "Insertion Confirm", "Warning", JOptionPane.OK_CANCEL_OPTION);
 											//Insert
-											if(object == JOptionPane.OK_OPTION){
-												db.insert_transport_detail(data2);
+											Box box = fac.createBox(Integer.parseInt(t_id.getText()), cb_boxSize.getSelectedItem().toString(), Integer.parseInt(t_weight.getText()), cb_Type.getSelectedItem().toString());
+											if (object == JOptionPane.OK_OPTION) {
+												db.insert_transport_detail(data2, box);
 												System.out.println("inserted");
 												db.insert_transport(data);
 												t_senderName.setText("");
@@ -308,35 +317,31 @@ public class Order {
 												t_price.setText(null);
 												cb_boxSize.setSelectedIndex(0);
 
-												if(db.checkerror>0){
-													t_id.setText(String.format("%d",Integer.parseInt(t_id.getText())));
-												}else{
-													t_id.setText(String.format("%d",Integer.parseInt(t_id.getText())+1));
+												if (db.checkerror > 0) {
+													t_id.setText(String.format("%d", Integer.parseInt(t_id.getText())));
+													t_senderName.setText("");
+													t_senderAddress.setText("");
+													t_senderTel.setText("");
+
+													t_receiverName.setText(null);
+													t_receiverAddress.setText(null);
+													t_receiverTel.setText("");
+
+													t_weight.setText(null);
+													t_volume.setText(null);
+													t_price.setText(null);
+													cb_boxSize.setSelectedIndex(0);
+
+													t_id.setText(String.format("%d", Integer.parseInt(t_id.getText())));
 												}
-											}else if(object == JOptionPane.CANCEL_OPTION){
-												t_senderName.setText("");
-												t_senderAddress.setText("");
-												t_senderTel.setText("");
-
-												t_receiverName.setText(null);
-												t_receiverAddress.setText(null);
-												t_receiverTel.setText("");
-
-												t_weight.setText(null);
-												t_volume.setText(null);
-												t_price.setText(null);
-												cb_boxSize.setSelectedIndex(0);
-
-												t_id.setText(String.format("%d",Integer.parseInt(t_id.getText())));
 											}
 										}
+
 									}
 
 								}
 
 							}
-
-
 					}
 				});
 
@@ -377,7 +382,6 @@ public class Order {
 				ArrayList<String> size = new ArrayList<String>();
 				int i = 0;
 				while (rs2.next()){
-
 					size.add(rs2.getString("size"));
 					width[i]=rs2.getInt("width");
 					height[i]=rs2.getInt("height");

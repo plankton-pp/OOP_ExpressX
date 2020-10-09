@@ -1,7 +1,7 @@
 package EXPRESS;
 
 public class BoxFac {
-    public Box createBox(int id,String size,int weight){
+    public Box createBox(int id,String size,int weight,String transport){
         String detail="ขนาดกล่อง: ";
         int mini[]={14,20,6};
         int s[]={20,30,11};
@@ -47,6 +47,6 @@ public class BoxFac {
             }break;
         default:break;
         }
-        return new Box(id,size,weight,detail);
+        return new Box(id,size,weight,detail,transport);
     }
 }

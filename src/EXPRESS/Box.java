@@ -5,13 +5,17 @@ public class Box {
     private String size;
     private int weight = 0;
     private String volume;
-    private String status ="Pending";
+    private String status ="Picked up";
+    private String transporting;
+    public String[] detail;
 
-    public Box(int id,String size,int weight,String volume){
+    public Box(int id,String size,int weight,String volume,String transport){
         setId(id);
         setSize(size);
         setWeight(weight);
         setVolume(volume);
+        setTransporting(transport);
+        detail= new String[]{String.format("%d", id), size, String.format("%d", weight), volume,status,transport};
         System.out.println("The Box has been created and setted !!!");
     }
 //SET Methods
@@ -37,6 +41,10 @@ public class Box {
         this.weight = weight;
     }
 
+    public void setTransporting(String transporting) {
+        this.transporting = transporting;
+    }
+
     //GET Methods
     public int getId() {
         return id;
@@ -56,5 +64,9 @@ public class Box {
 
     public String getStatus() {
         return status;
+    }
+
+    public String getTransporting() {
+        return transporting;
     }
 }
