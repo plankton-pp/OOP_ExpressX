@@ -182,11 +182,27 @@ public class CustomerTracking {
 		btnSearch.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				try {
 					if(!t_search.getText().equals("")){
 						DB db = new DB();
-						String[] data = db.query("select * from transport_detail where transport_id like \""+t_search.getText()+"\";");
+						String[] data = db.query("select * from transport_detail \n" +
+								"inner join transport \n" +
+								"on transport_detail.transport_id=transport.transport_id\n" +
+								"where transport_detail.transport_id LIKE '" +t_search.getText().toUpperCase()+
+								"';");
+						t_status.setText(data[8]);
 						t_id.setText(data[0]);
+						t_senderName.setText(data[10]);
+						tp_senderAddress.setText(data[11]);
+						t_senderTel.setText(data[12]);
+						t_recieverName.setText(data[13]);
+						tp_recieverAddress.setText(data[14]);
+						t_recieverTel.setText(data[15]);
 					}
+				}catch (ArrayIndexOutOfBoundsException aobe){
+					JOptionPane.showMessageDialog(new JFrame(),"Searching Not Found\nPlease Check Your Tracking No And Try Again","Searching",JOptionPane.OK_OPTION);
+				}
+
 			}
 		});
 	}

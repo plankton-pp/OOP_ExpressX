@@ -92,16 +92,25 @@ public class DB {
 				if(con!=null){
 					System.out.println("Connected ");
 					rs = st.executeQuery(search);
-					data= new String[]{rs.getString("transport_id")
-							, String.format("%d", rs.getInt("package_id"))
-							, rs.getString("date")
-							, rs.getTime("time").toString()
-							, rs.getString("boxsize")
-							, rs.getString("volume")
-							, String.format("%d", rs.getInt("weight"))
-							, String.format("%d", rs.getInt("price"))
-							, rs.getString("status")
-							, rs.getString("transport_detail")};
+					while (rs.next()){
+						data= new String[]{rs.getString("transport_id")
+								, String.format("%d", rs.getInt("package_id"))
+								, rs.getString("date")
+								, rs.getTime("time").toString()
+								, rs.getString("boxsize")
+								, rs.getString("volume")
+								, String.format("%d", rs.getInt("weight"))
+								, String.format("%d", rs.getInt("price"))
+								, rs.getString("status")
+								, rs.getString("transport_detail")
+								, rs.getString("sender_name")
+								, rs.getString("sender_address")
+								, rs.getString("sender_tel")
+								, rs.getString("receiver_name")
+								, rs.getString("receiver_address")
+								, rs.getString("receiver_tel")
+						};
+					}
 				}
 				st.close();
 				con.close();
