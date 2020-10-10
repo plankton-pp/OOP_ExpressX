@@ -27,6 +27,7 @@ public class Order {
 	private JTextField t_volume;
 	private JTextField t_weight;
 	private JTextField t_price;
+	private JTextField t_Time;
 
 
 
@@ -177,13 +178,10 @@ public class Order {
 				lblTime.setBounds(458, 114, 77, 14);
 				frame.getContentPane().add(lblTime);
 
-				JTextField t_Time = new JTextField();
+				t_Time = new JTextField();
 				t_Time.setEditable(false);
 				t_Time.setColumns(10);
 				t_Time.setBounds(517, 112, 130, 29);
-				LocalTime now = LocalTime.now();
-				DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
-				t_Time.setText(dtf.format(now));
 				frame.getContentPane().add(t_Time);
 
 				JLabel lblBoxSize = new JLabel("Box Size");
@@ -264,6 +262,8 @@ public class Order {
 				JLabel lblPrice = new JLabel("Price");
 				lblPrice.setBounds(476, 443, 45, 14);
 				frame.getContentPane().add(lblPrice);
+
+				clock();
 
 				JButton btnAdd = new JButton("Add");
 				btnAdd.addActionListener(new ActionListener() {
@@ -464,5 +464,21 @@ public class Order {
 	}
 	public String getMonth(int month) {
 		return new DateFormatSymbols().getMonths()[month-1];
+	}
+	public void clock(){
+		Thread clock = new Thread(){
+			@Override
+			public void run() {
+				for(;;){
+					LocalTime now = LocalTime.now();
+					DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
+					t_Time.setText(dtf.format(now));
+					frame.getContentPane().add(t_Time);
+
+				}
+			}
+		};
+		clock.start();
+
 	}
 }

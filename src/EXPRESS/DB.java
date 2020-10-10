@@ -2,8 +2,6 @@ package EXPRESS;
 
 import javax.swing.*;
 import java.sql.*;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 
 public class DB {
 	public int checkerror=0;

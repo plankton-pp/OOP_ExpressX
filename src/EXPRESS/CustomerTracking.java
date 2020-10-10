@@ -7,8 +7,6 @@ import javax.swing.*;
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 public class CustomerTracking {
 
@@ -163,21 +161,40 @@ public class CustomerTracking {
 		btnSearch.setBounds(680, 74, 58, 21);
 		frame.getContentPane().add(btnSearch);
 
-		JLabel lbl_getP = new JLabel("getP");
+		Icon getP = new ImageIcon("../OOP_EXPRESS/src/images/package_ConvertImage.png");
+		JLabel lbl_getP = new JLabel(getP);
 		lbl_getP.setBounds(206, 135, 77, 52);
 		frame.getContentPane().add(lbl_getP);
 
-		JLabel lbl_sendP = new JLabel("sendP");
-		lbl_sendP.setBounds(307, 135, 77, 52);
+		Icon deliverP = new ImageIcon("../OOP_EXPRESS/src/images/deliver_ConvertImage.png");
+		JLabel lbl_deliverP = new JLabel(deliverP);
+		lbl_deliverP.setBounds(307, 135, 77, 52);
+		frame.getContentPane().add(lbl_deliverP);
+
+		Icon sendP = new ImageIcon("../OOP_EXPRESS/src/images/send_ConvertImage.png");
+		JLabel lbl_sendP = new JLabel(sendP);
+		lbl_sendP.setBounds(407, 135, 77, 52);
 		frame.getContentPane().add(lbl_sendP);
 
-		JLabel lbl_giveP = new JLabel("giveP");
-		lbl_giveP.setBounds(407, 135, 77, 52);
-		frame.getContentPane().add(lbl_giveP);
-
-		JLabel lbl_receivedP = new JLabel("receivedP");
+		Icon receivedP = new ImageIcon("../OOP_EXPRESS/src/images/received_ConvertImage.png");
+		JLabel lbl_receivedP = new JLabel(receivedP);
 		lbl_receivedP.setBounds(514, 135, 77, 52);
 		frame.getContentPane().add(lbl_receivedP);
+
+		JButton btnBack = new JButton("Back");
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnBack.setBounds(627, 492, 77, 23);
+		frame.getContentPane().add(btnBack);
+
+		btnQuit.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				frame.dispose();
+			}
+		});
 
 		btnSearch.addActionListener(new ActionListener() {
 			@Override
@@ -198,6 +215,21 @@ public class CustomerTracking {
 						t_recieverName.setText(data[13]);
 						tp_recieverAddress.setText(data[14]);
 						t_recieverTel.setText(data[15]);
+
+						switch (data[8]){
+							case "Picked up":lbl_getP.setIcon(new ImageIcon("../OOP_EXPRESS/src/images/package.png"));break;
+							case "Transporting":lbl_getP.setIcon(new ImageIcon("../OOP_EXPRESS/src/images/package.png"));
+								lbl_deliverP.setIcon(new ImageIcon("../OOP_EXPRESS/src/images/deliver.png"));
+								break;
+							case "Deliver":lbl_getP.setIcon(new ImageIcon("../OOP_EXPRESS/src/images/package.png"));
+								lbl_deliverP.setIcon(new ImageIcon("../OOP_EXPRESS/src/images/deliver.png"));
+								lbl_sendP.setIcon(new ImageIcon("../OOP_EXPRESS/src/images/send.png"));
+								break;
+							case "Received":lbl_getP.setIcon(new ImageIcon("../OOP_EXPRESS/src/images/package.png"));
+								lbl_deliverP.setIcon(new ImageIcon("../OOP_EXPRESS/src/images/deliver.png"));
+								lbl_sendP.setIcon(new ImageIcon("../OOP_EXPRESS/src/images/send.png"));
+								lbl_receivedP.setIcon(new ImageIcon("../OOP_EXPRESS/src/images/received.png"));break;
+						}
 					}
 				}catch (ArrayIndexOutOfBoundsException aobe){
 					JOptionPane.showMessageDialog(new JFrame(),"Searching Not Found\nPlease Check Your Tracking No And Try Again","Searching",JOptionPane.OK_OPTION);
