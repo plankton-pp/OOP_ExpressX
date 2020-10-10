@@ -75,7 +75,7 @@ public class Order {
 				con = DriverManager.getConnection("jdbc:mysql://localhost/OOPExpress","root","");
 				st = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
 				System.out.println("Connected");
-				rs=st.executeQuery("select max(transport_id) as lastID from transport;");
+				rs=st.executeQuery("select max(package_id) as lastID from transport;");
 				while(rs.next()){
 					if(rs==null){
 						System.out.print("Here is last");

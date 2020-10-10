@@ -19,7 +19,6 @@ public class DB {
 				st = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
 				if(con!=null){
 					System.out.println("Connected From transport");
-					System.out.print("ID: ");
 					if(value[0]!="0"){
 						st.executeUpdate("INSERT INTO `transport`( `package_id`,`sender_name`, `sender_address`, `sender_tel`, `receiver_name`, `receiver_address`, `receiver_tel`,`transport_id`) " +
 								"VALUES ("+(Integer.parseInt(value[0]))+",'"+value[1]+"','"+value[2]+"','"+value[3]+"','"+value[4]+"','"+value[5]+"','"+value[6]+"','"+value[7]+Integer.parseInt(value[0])+"')");
@@ -79,10 +78,11 @@ public class DB {
 			e.printStackTrace();
 		}
 	}
-	public ResultSet query(String search) {
-		Connection con = null;
+	public String[] query(String search) {
+		Connection con ;
 		Statement st;
-		ResultSet rs=null;
+		ResultSet rs;
+		String[] data = new String[10];
 		checkerror=0;
 		try{
 			try{
@@ -92,6 +92,16 @@ public class DB {
 				if(con!=null){
 					System.out.println("Connected ");
 					rs = st.executeQuery(search);
+					data= new String[]{rs.getString("transport_id")
+							, String.format("%d", rs.getInt("package_id"))
+							, rs.getString("date")
+							, rs.getTime("time").toString()
+							, rs.getString("boxsize")
+							, rs.getString("volume")
+							, String.format("%d", rs.getInt("weight"))
+							, String.format("%d", rs.getInt("price"))
+							, rs.getString("status")
+							, rs.getString("transport_detail")};
 				}
 				st.close();
 				con.close();
@@ -104,7 +114,7 @@ public class DB {
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-		return rs;
+		return data;
 	}
 
 }

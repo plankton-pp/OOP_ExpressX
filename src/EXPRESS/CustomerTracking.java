@@ -7,6 +7,8 @@ import javax.swing.*;
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class CustomerTracking {
 
@@ -181,7 +183,9 @@ public class CustomerTracking {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 					if(!t_search.getText().equals("")){
-						System.out.println("Hello therre");
+						DB db = new DB();
+						String[] data = db.query("select * from transport_detail where transport_id like \""+t_search.getText()+"\";");
+						t_id.setText(data[0]);
 					}
 			}
 		});
