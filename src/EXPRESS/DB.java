@@ -56,8 +56,24 @@ public class DB {
 							System.out.println(i);
 						}
 						st.executeUpdate("INSERT INTO `transport_detail`(`package_id`, `date`, `time`, `boxsize`, `volume`, `weight`, `price`, `status`, `transport_detail`,`transport_id`)" +
-								"VALUES ("+box.getId()+",'"+value[0]+"','"+value[1]+"','"+box.getSize()+"','"+box.getVolume()+"','"+box.getWeight()+"','"+value[2]+"','"+box.getStatus()+"','"+box.getTransporting()+"','"+(value[3]+box.getId())+"')");
-
+								"VALUES ("+box.getId()
+								+",'"+value[0]
+								+"','"+value[1]
+								+"','"+box.getSize()
+								+"','"+box.getVolume()
+								+"','"+box.getWeight()
+								+"','"+value[2]
+								+"','"+box.getStatus()
+								+"','"+box.getTransporting()
+								+"','"+(value[3]+box.getId())+"');");
+						st.executeUpdate("INSERT INTO `status`(`transport_id`, `package_id`, `picked_upTime`, `transportingTime`, `deliverTime`, `receivedTime`, `picked_upDate`, `transportingDate`, `deliverDate`, `receivedDate`, `status`)"+
+								"VALUES('"+(value[3]+box.getId())
+								+"','"+box.getId()
+								+"','"+value[1]
+								+"','00:00:00','00:00:00','00:00:00"
+								+"','"+value[0]
+								+"','null','null','null"
+								+"','"+box.getStatus()+"');");
 						}
 				}
 				st.close();
