@@ -21,15 +21,15 @@ public class DB {
 					System.out.println("Connected From transport");
 					System.out.print("ID: ");
 					if(value[0]!="0"){
-						st.executeUpdate("INSERT INTO `transport`( `transport_id`,`sender_name`, `sender_address`, `sender_tel`, `receiver_name`, `receiver_address`, `receiver_tel`) " +
-								"VALUES ("+(Integer.parseInt(value[0]))+",'"+value[1]+"','"+value[2]+"','"+value[3]+"','"+value[4]+"','"+value[5]+"','"+value[6]+"')");
+						st.executeUpdate("INSERT INTO `transport`( `package_id`,`sender_name`, `sender_address`, `sender_tel`, `receiver_name`, `receiver_address`, `receiver_tel`,`transport_id`) " +
+								"VALUES ("+(Integer.parseInt(value[0]))+",'"+value[1]+"','"+value[2]+"','"+value[3]+"','"+value[4]+"','"+value[5]+"','"+value[6]+"','"+value[7]+Integer.parseInt(value[0])+"')");
 						}
 				}
 				st.close();
 				con.close();
 
 			}catch (SQLException sqle){
-				JOptionPane.showMessageDialog(new JFrame(),"Insertion Fail","Alert",JOptionPane.WARNING_MESSAGE);
+				JOptionPane.showMessageDialog(new JFrame(),"Insertion Fail","Alert From Trasport",JOptionPane.WARNING_MESSAGE);
 				sqle.printStackTrace();
 				checkerror=1;
 			}
@@ -58,8 +58,8 @@ public class DB {
 						for (String i:value) {
 							System.out.println(i);
 						}
-						st.executeUpdate("INSERT INTO `transport_detail`(`tansport_id`, `date`, `time`, `boxsize`, `volume`, `weight`, `price`, `status`, `transport_detail`)" +
-								"VALUES ("+box.getId()+",'"+value[0]+"','"+value[1]+"','"+box.getSize()+"','"+box.getVolume()+"','"+box.getWeight()+"','"+value[2]+"','"+box.getStatus()+"','"+box.getTransporting()+"')");
+						st.executeUpdate("INSERT INTO `transport_detail`(`package_id`, `date`, `time`, `boxsize`, `volume`, `weight`, `price`, `status`, `transport_detail`,`transport_id`)" +
+								"VALUES ("+box.getId()+",'"+value[0]+"','"+value[1]+"','"+box.getSize()+"','"+box.getVolume()+"','"+box.getWeight()+"','"+value[2]+"','"+box.getStatus()+"','"+box.getTransporting()+"','"+(value[3]+box.getId())+"')");
 
 						}
 				}
@@ -67,7 +67,7 @@ public class DB {
 				con.close();
 
 			}catch (SQLException sqle){
-				JOptionPane.showMessageDialog(new JFrame(),"Insertion Fail","Alert",JOptionPane.WARNING_MESSAGE);
+				JOptionPane.showMessageDialog(new JFrame(),"Insertion Fail","Alert From Transport_Detail",JOptionPane.WARNING_MESSAGE);
 				sqle.printStackTrace();
 				checkerror=1;
 			}

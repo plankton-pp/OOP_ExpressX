@@ -3,13 +3,7 @@ package EXPRESS;
 import java.awt.EventQueue;
 import java.awt.Font;
 
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JTextPane;
+import javax.swing.*;
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -64,13 +58,13 @@ public class CustomerTracking {
 		lblSendingStatus.setBounds(279, 26, 148, 20);
 		frame.getContentPane().add(lblSendingStatus);
 
-		JLabel lblSearch = new JLabel("Tracking:");
-		lblSearch.setBounds(22, 77, 64, 14);
+		JLabel lblSearch = new JLabel("Tracking NO. :");
+		lblSearch.setBounds(22, 77, 85, 14);
 		frame.getContentPane().add(lblSearch);
 
 		t_search = new JTextField();
 		t_search.setColumns(10);
-		t_search.setBounds(96, 75, 583, 20);
+		t_search.setBounds(119, 75, 560, 20);
 		frame.getContentPane().add(t_search);
 
 		JLabel lblID = new JLabel("ID");
@@ -186,8 +180,9 @@ public class CustomerTracking {
 		btnSearch.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				DB db = new DB();
-				db.query("");
+					if(!t_search.getText().equals("")){
+						System.out.println("Hello therre");
+					}
 			}
 		});
 	}

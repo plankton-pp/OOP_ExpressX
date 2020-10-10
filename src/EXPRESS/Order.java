@@ -38,7 +38,7 @@ public class Order {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Order window = new Order();
+					Order window = new Order("run");
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -51,7 +51,12 @@ public class Order {
 	 * Create the application.
 	 * @wbp.parser.entryPoint
 	 */
-	public Order() {
+	public Order(){
+
+	}
+	public Order(String start)
+	{
+		if(start.equals("run"))
 		initialize();
 	}
 
@@ -291,17 +296,18 @@ public class Order {
 										} else {
 											System.out.println("Complete");
 											BoxFac fac = new BoxFac();
-											String data2[] = {day + "-" + mon + "-" + year, t_Time.getText(), t_price.getText()};
+											char code = cb_Type.getSelectedItem().toString().charAt(0);
+											String data2[] = {day + "-" + mon + "-" + year, t_Time.getText(), t_price.getText(),String.format("%c",code).toUpperCase()};
 											//Data from FORM for Insert on DATABASE
 											String data[] = {t_id.getText(), t_senderName.getText(), t_senderAddress.getText(), t_senderTel.getText()
-													, t_receiverName.getText(), t_receiverAddress.getText(), t_receiverTel.getText()};
+													, t_receiverName.getText(), t_receiverAddress.getText(), t_receiverTel.getText(),String.format("%c",code).toUpperCase()};
 											//Create Instance of DB Class
 											DB db = new DB();
 											//If Insertion were "Successfull" alert msg
 											int object = JOptionPane.showConfirmDialog(frame, "Insertion Confirm", "Warning", JOptionPane.OK_CANCEL_OPTION);
 											//Insert
-											Box box = fac.createBox(Integer.parseInt(t_id.getText()), cb_boxSize.getSelectedItem().toString(), Integer.parseInt(t_weight.getText()), cb_Type.getSelectedItem().toString());
 											if (object == JOptionPane.OK_OPTION) {
+												Box box = fac.createBox(Integer.parseInt(t_id.getText()), cb_boxSize.getSelectedItem().toString(), Integer.parseInt(t_weight.getText()), cb_Type.getSelectedItem().toString());
 												db.insert_transport_detail(data2, box);
 												System.out.println("inserted");
 												db.insert_transport(data);
@@ -319,9 +325,9 @@ public class Order {
 
 												if (db.checkerror > 0) {
 													t_id.setText(String.format("%d", Integer.parseInt(t_id.getText())));
-													t_senderName.setText("");
-													t_senderAddress.setText("");
-													t_senderTel.setText("");
+													t_senderName.setText(null);
+													t_senderAddress.setText(null);
+													t_senderTel.setText(null);
 
 													t_receiverName.setText(null);
 													t_receiverAddress.setText(null);
@@ -331,9 +337,33 @@ public class Order {
 													t_volume.setText(null);
 													t_price.setText(null);
 													cb_boxSize.setSelectedIndex(0);
+												}else {
+													t_id.setText(String.format("%d", Integer.parseInt(t_id.getText())+1));
+													t_senderName.setText(null);
+													t_senderAddress.setText(null);
+													t_senderTel.setText(null);
 
-													t_id.setText(String.format("%d", Integer.parseInt(t_id.getText())));
+													t_receiverName.setText(null);
+													t_receiverAddress.setText(null);
+													t_receiverTel.setText("");
+
+													t_weight.setText(null);
+													t_volume.setText(null);
+													t_price.setText(null);
+													cb_boxSize.setSelectedIndex(0);
 												}
+											}else {
+												t_senderName.setText(null);
+												t_senderAddress.setText(null);
+												t_senderTel.setText(null);
+
+												t_receiverName.setText(null);
+												t_receiverAddress.setText(null);
+												t_receiverTel.setText(null);
+												t_weight.setText(null);
+												t_volume.setText(null);
+												t_price.setText(null);
+												cb_boxSize.setSelectedIndex(0);
 											}
 										}
 
