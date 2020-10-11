@@ -13,11 +13,11 @@ public class Carry {
     /**
      * Launch the application.
      */
-    public static void main(String[] args) {
+    public void Delivery() {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    Carry window = new Carry();
+                    Carry window = new Carry("start");
                     window.frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -29,7 +29,8 @@ public class Carry {
     /**
      * Create the application.
      */
-    public Carry() {
+    public Carry(){};
+    public Carry(String start) {
         initialize();
     }
 
@@ -52,6 +53,9 @@ public class Carry {
         frame.getContentPane().add(btn_send);
 
         status = new JTextArea();
+        status.setEditable(false);
+        status.setBounds(314, 65, 264, 293);
+        status.setColumns(10);
 
         JButton btn_back = new JButton("Back");
         btn_back.setBounds(374, 386, 89, 23);
@@ -66,12 +70,12 @@ public class Carry {
         lblCarryOutDelivery.setBounds(233, 26, 146, 20);
         frame.getContentPane().add(lblCarryOutDelivery);
 
-        JScrollPane scroll = new JScrollPane (status,
-                JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-        status.setEditable(false);
+        JScrollPane scroll = new JScrollPane();
+        scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        scroll.getViewport().add(status);
         scroll.setBounds(314, 65, 264, 293);
         frame.getContentPane().add(scroll);
-        status.setColumns(10);
+
 
         btn_send.addActionListener(new ActionListener() {
             @Override

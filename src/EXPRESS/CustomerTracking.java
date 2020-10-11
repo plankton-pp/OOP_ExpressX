@@ -23,11 +23,11 @@ public class CustomerTracking {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public void Check() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					CustomerTracking window = new CustomerTracking();
+					CustomerTracking window = new CustomerTracking("start");
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -39,7 +39,8 @@ public class CustomerTracking {
 	/**
 	 * Create the application.
 	 */
-	public CustomerTracking() {
+	public CustomerTracking(){}
+	public CustomerTracking(String start) {
 		initialize();
 	}
 
