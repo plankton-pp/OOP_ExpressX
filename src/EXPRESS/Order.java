@@ -115,17 +115,17 @@ public class Order {
 				lblSenderTel.setBounds(39, 270, 114, 14);
 				frame.getContentPane().add(lblSenderTel);
 
-				JLabel lblRecieverName = new JLabel("Reciever Name");
-				lblRecieverName.setBounds(39, 371, 114, 14);
-				frame.getContentPane().add(lblRecieverName);
+				JLabel lblReceiverName = new JLabel("Receiver Name");
+				lblReceiverName.setBounds(39, 371, 114, 14);
+				frame.getContentPane().add(lblReceiverName);
 
-				JLabel lblRecieverAddress = new JLabel("Reciever Address");
-				lblRecieverAddress.setBounds(39, 410, 114, 14);
-				frame.getContentPane().add(lblRecieverAddress);
+				JLabel lblReceiverAddress = new JLabel("Receiver Address");
+				lblReceiverAddress.setBounds(39, 410, 114, 14);
+				frame.getContentPane().add(lblReceiverAddress);
 
-				JLabel lblRecieverTel = new JLabel("Reciever Tel.");
-				lblRecieverTel.setBounds(39, 490, 114, 14);
-				frame.getContentPane().add(lblRecieverTel);
+				JLabel lblReceiverTel = new JLabel("Receiver Tel.");
+				lblReceiverTel.setBounds(39, 490, 114, 14);
+				frame.getContentPane().add(lblReceiverTel);
 
 				t_senderName = new JTextField();
 				t_senderName.setColumns(10);
@@ -405,10 +405,10 @@ public class Order {
 				lblId.setBounds(67, 75, 30, 14);
 				frame.getContentPane().add(lblId);
 
-				JLabel lblreciever = new JLabel("RECIEVER");
-				lblreciever.setFont(new Font("Tahoma", Font.BOLD, 14));
-				lblreciever.setBounds(39, 326, 114, 13);
-				frame.getContentPane().add(lblreciever);
+				JLabel lblreceiver = new JLabel("RECEIVER");
+				lblreceiver.setFont(new Font("Tahoma", Font.BOLD, 14));
+				lblreceiver.setBounds(39, 326, 114, 13);
+				frame.getContentPane().add(lblreceiver);
 
 				JLabel lblSender_1 = new JLabel("SENDER");
 				lblSender_1.setFont(new Font("Tahoma", Font.BOLD, 14));

@@ -15,8 +15,8 @@ public class CustomerTracking {
 	private JTextField t_id;
 	private JTextField t_senderName;
 	private JTextField t_senderTel;
-	private JTextField t_recieverName;
-	private JTextField t_recieverTel;
+	private JTextField t_receiverName;
+	private JTextField t_receiverTel;
 	private JTextField t_status;
 
 
@@ -112,31 +112,31 @@ public class CustomerTracking {
 		lblRecieverName.setBounds(403, 349, 117, 14);
 		frame.getContentPane().add(lblRecieverName);
 
-		t_recieverName = new JTextField();
-		t_recieverName.setEditable(false);
-		t_recieverName.setColumns(10);
-		t_recieverName.setBounds(495, 346, 184, 20);
-		frame.getContentPane().add(t_recieverName);
+		t_receiverName = new JTextField();
+		t_receiverName.setEditable(false);
+		t_receiverName.setColumns(10);
+		t_receiverName.setBounds(495, 346, 184, 20);
+		frame.getContentPane().add(t_receiverName);
 
 		JLabel lblTo = new JLabel("To");
 		lblTo.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 15));
 		lblTo.setBounds(403, 312, 46, 14);
 		frame.getContentPane().add(lblTo);
 
-		JTextPane tp_recieverAddress = new JTextPane();
-		tp_recieverAddress.setEditable(false);
-		tp_recieverAddress.setBounds(495, 374, 231, 57);
-		frame.getContentPane().add(tp_recieverAddress);
+		JTextPane tp_receiverAddress = new JTextPane();
+		tp_receiverAddress.setEditable(false);
+		tp_receiverAddress.setBounds(495, 374, 231, 57);
+		frame.getContentPane().add(tp_receiverAddress);
 
 		JLabel lblRecieverTel = new JLabel("Reciever Tel.");
 		lblRecieverTel.setBounds(403, 442, 91, 14);
 		frame.getContentPane().add(lblRecieverTel);
 
-		t_recieverTel = new JTextField();
-		t_recieverTel.setEditable(false);
-		t_recieverTel.setColumns(10);
-		t_recieverTel.setBounds(495, 439, 184, 20);
-		frame.getContentPane().add(t_recieverTel);
+		t_receiverTel = new JTextField();
+		t_receiverTel.setEditable(false);
+		t_receiverTel.setColumns(10);
+		t_receiverTel.setBounds(495, 439, 184, 20);
+		frame.getContentPane().add(t_receiverTel);
 
 		JLabel lblStatus = new JLabel("Status");
 		lblStatus.setBounds(32, 235, 72, 14);
@@ -214,9 +214,9 @@ public class CustomerTracking {
 						t_senderName.setText(data[10]);
 						tp_senderAddress.setText(data[11]);
 						t_senderTel.setText(data[12]);
-						t_recieverName.setText(data[13]);
-						tp_recieverAddress.setText(data[14]);
-						t_recieverTel.setText(data[15]);
+						t_receiverName.setText(data[13]);
+						tp_receiverAddress.setText(data[14]);
+						t_receiverTel.setText(data[15]);
 
 						switch (data[8]){
 							case "Picked up":lbl_getP.setIcon(new ImageIcon("../OOP_EXPRESS/src/images/package.png"));break;
