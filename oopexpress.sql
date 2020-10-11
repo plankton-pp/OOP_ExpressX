@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 11, 2020 at 09:23 AM
+-- Generation Time: Oct 11, 2020 at 12:27 PM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.2.32
 
@@ -70,8 +70,7 @@ CREATE TABLE `status` (
 --
 
 INSERT INTO `status` (`transport_id`, `package_id`, `picked_upTime`, `transportingTime`, `deliverTime`, `receivedTime`, `picked_upDate`, `transportingDate`, `deliverDate`, `receivedDate`, `status`) VALUES
-('E1', 1, '18:45:28', '05:04:42', '05:06:19', '05:13:47', '10-10-2020', '11-10-2020', '11-10-2020', '11-10-2020', 'Received'),
-('N2', 2, '05:06:00', '05:06:19', '05:14:01', '05:14:16', '11-10-2020', '11-10-2020', '11-10-2020', '11-10-2020', 'Received');
+('N1', 1, '17:11:38', '17:12:05', '17:12:25', '17:13:17', '11-10-2020', '11-10-2020', '11-10-2020', '11-10-2020', 'Received');
 
 -- --------------------------------------------------------
 
@@ -95,8 +94,7 @@ CREATE TABLE `transport` (
 --
 
 INSERT INTO `transport` (`transport_id`, `package_id`, `sender_name`, `sender_address`, `sender_tel`, `receiver_name`, `receiver_address`, `receiver_tel`) VALUES
-('E1', 1, 'Thep Nimit', 'S9', '1150', 'Meen Wasun', 'S11', '1112'),
-('N2', 2, 'H', 'h', 'h', 'b', 'b', 'b');
+('N1', 1, 'bsdf', 'sdffsd', 'sdfd', 'fsfsdfd', 'dsfsd', 'sdfds');
 
 -- --------------------------------------------------------
 
@@ -122,8 +120,7 @@ CREATE TABLE `transport_detail` (
 --
 
 INSERT INTO `transport_detail` (`transport_id`, `package_id`, `date`, `time`, `boxsize`, `volume`, `weight`, `price`, `status`, `transport_detail`) VALUES
-('E1', 1, '10-10-2020', '18:45:28', 'XL', 'Size of Box: 40x50x30 inches', 400000, 400000, 'Picked up', 'Emergency'),
-('N2', 2, '11-10-2020', '05:06:00', 'M', 'Size of Box: 27x43x20 inches', 145, 145, 'Picked up', 'Normal');
+('N1', 1, '11-10-2020', '17:11:38', 'mini', 'Size of Box: 14x20x6 inches', 55, 57, 'Picked up', 'Normal');
 
 -- --------------------------------------------------------
 
@@ -132,10 +129,17 @@ INSERT INTO `transport_detail` (`transport_id`, `package_id`, `date`, `time`, `b
 --
 
 CREATE TABLE `updatedb` (
-  `transport_id` varchar(10) NOT NULL,
-  `status` varchar(50) NOT NULL,
-  `time` time NOT NULL
+  `dashboard` varchar(500) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `updatedb`
+--
+
+INSERT INTO `updatedb` (`dashboard`) VALUES
+('N1 has been changed to Transport :17:12:05'),
+('N1 has been changed to Deliver :17:12:25'),
+('N1 has been changed to Received :17:13:17');
 
 --
 -- Indexes for dumped tables
@@ -163,12 +167,6 @@ ALTER TABLE `transport`
 -- Indexes for table `transport_detail`
 --
 ALTER TABLE `transport_detail`
-  ADD UNIQUE KEY `transport_id` (`transport_id`);
-
---
--- Indexes for table `updatedb`
---
-ALTER TABLE `updatedb`
   ADD UNIQUE KEY `transport_id` (`transport_id`);
 COMMIT;
 
