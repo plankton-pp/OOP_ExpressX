@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-public class Order {
+public class Order{
 
 	private JFrame frame;
 	private JTextField t_id;

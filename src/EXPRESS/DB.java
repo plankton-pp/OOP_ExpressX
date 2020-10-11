@@ -31,9 +31,12 @@ public class DB {
 				checkerror=1;
 			}
 			if(checkerror>0){
-
 			}else {
-				JOptionPane.showConfirmDialog(new JFrame(), "Affected 1 row with ID: " + value[0], "TABLE: Transport", JOptionPane.OK_CANCEL_OPTION);
+				JOptionPane.showConfirmDialog(new JFrame(),"Affected 1 row with ID: "+value[0]
+						+"\nSend From: "+value[1]+"\n"
+						+"To: "+value[4]+"\n"
+						+"\n\nYour Tracking No: "+value[7]+Integer.parseInt(value[0])+"\n"
+						,"TABLE: Transport, Transport_Detail",JOptionPane.OK_CANCEL_OPTION);
 			}
 			}catch(Exception e){
 			e.printStackTrace();
@@ -83,10 +86,6 @@ public class DB {
 				JOptionPane.showMessageDialog(new JFrame(),"Insertion Fail","Alert From Transport_Detail",JOptionPane.WARNING_MESSAGE);
 				sqle.printStackTrace();
 				checkerror=1;
-			}
-			if(checkerror>0){
-			}else {
-				JOptionPane.showConfirmDialog(new JFrame(),"Affected 1 row with ID: "+box.getId(),"TABLE: Transport_Detail",JOptionPane.OK_CANCEL_OPTION);
 			}
 		}catch(Exception e){
 			e.printStackTrace();

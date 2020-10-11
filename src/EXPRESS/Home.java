@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class Home {
+public class Home extends ClearDB{
 
     private JFrame frame;
 
@@ -34,6 +34,7 @@ public class Home {
      */
     public Home(){}
     public Home(String start) {
+        super();
         initialize();
     }
 
@@ -94,8 +95,8 @@ public class Home {
             @Override
             public void mouseClicked(MouseEvent e) {
                 lblBinIcon.setIcon(new ImageIcon("../OOP_EXPRESS/src/images/garbage.png"));
-                ClearDB db = new ClearDB();
-                db.Clear();
+                new ClearDB("clearall");
+
                 JOptionPane.showMessageDialog(new JFrame(),"DataBase Has Been Cleaned up !","DB: Alert",JOptionPane.PLAIN_MESSAGE);
 
             }

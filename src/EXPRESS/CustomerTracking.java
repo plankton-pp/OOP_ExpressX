@@ -8,7 +8,7 @@ import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class CustomerTracking {
+public class CustomerTracking{
 
 	private JFrame frame;
 	private JTextField t_search;
@@ -165,22 +165,22 @@ public class CustomerTracking {
 
 		Icon getP = new ImageIcon("../OOP_EXPRESS/src/images/package_ConvertImage.png");
 		JLabel lbl_getP = new JLabel(getP);
-		lbl_getP.setBounds(206, 135, 77, 52);
+		lbl_getP.setBounds(206, 135, 64, 64);
 		frame.getContentPane().add(lbl_getP);
 
 		Icon deliverP = new ImageIcon("../OOP_EXPRESS/src/images/deliver_ConvertImage.png");
 		JLabel lbl_deliverP = new JLabel(deliverP);
-		lbl_deliverP.setBounds(307, 135, 77, 52);
+		lbl_deliverP.setBounds(307, 135, 64, 64);
 		frame.getContentPane().add(lbl_deliverP);
 
 		Icon sendP = new ImageIcon("../OOP_EXPRESS/src/images/send_ConvertImage.png");
 		JLabel lbl_sendP = new JLabel(sendP);
-		lbl_sendP.setBounds(407, 135, 77, 52);
+		lbl_sendP.setBounds(407, 135, 64, 64);
 		frame.getContentPane().add(lbl_sendP);
 
 		Icon receivedP = new ImageIcon("../OOP_EXPRESS/src/images/received_ConvertImage.png");
 		JLabel lbl_receivedP = new JLabel(receivedP);
-		lbl_receivedP.setBounds(514, 135, 77, 52);
+		lbl_receivedP.setBounds(514, 135, 64, 64);
 		frame.getContentPane().add(lbl_receivedP);
 
 		JButton btnBack = new JButton("Back");

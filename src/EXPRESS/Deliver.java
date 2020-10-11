@@ -126,6 +126,7 @@ public class Deliver extends Thread{
                         System.out.println("Update:" + nexDate[i] + "->" + date);
                         //UPDATE `status` SET `status`='Picked up' WHERE transport_id='E1';
                         String sqlUpdate = null;
+                        String sqlUpdate2 =null;
                         String values=null;
                         try{
                             if (!nex[i].equals(null)) {
@@ -133,7 +134,9 @@ public class Deliver extends Thread{
                                 sqlUpdate = "UPDATE `status` SET `status`='" + nex[i] + "',`"
                                         + nexDate[i] + "`='" + date + "',`"
                                         + nexTime[i] + "`='" + cur + "' WHERE transport_id='" + id[i] + "';";
+                                sqlUpdate2 = "UPDATE `transport_detail` SET `status`='"+nex[i]+"' WHERE transport_id='"+id[i]+"';";
                                 values = "'"+id[i]+" has been changed to "+nex[i]+" :"+cur+"'";
+                                st.executeUpdate(sqlUpdate2);
                                 //"INSERT INTO `transport_detail`(`package_id`
                                 String sqlInsert="INSERT INTO `updatedb`(`dashboard`)VALUES("+values+");";
                                 System.out.println(sqlInsert);
@@ -143,7 +146,6 @@ public class Deliver extends Thread{
                         catch(NullPointerException npe){
                             continue;
                         }
-
                         st.executeUpdate(sqlUpdate);
                     }
                 } catch (SQLException throwables) {

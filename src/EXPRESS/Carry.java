@@ -134,7 +134,6 @@ public class Carry {
                                     }
                                     i++;
                                 }
-                                st.executeUpdate("DELETE From updatedb;");
 
                             }catch (SQLException sqle){
                                 JOptionPane.showMessageDialog(new JFrame(),"Query Fail","Alert From Carry",JOptionPane.WARNING_MESSAGE);
@@ -154,12 +153,14 @@ public class Carry {
             @Override
             public void actionPerformed(ActionEvent e) {
                 frame.dispose();
+                System.exit(0);
             }
         });
         btn_back.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 frame.dispose();
+                new ClearDB("clearUPDATE");
                 Home home = new Home();
                 home.run();
             }
