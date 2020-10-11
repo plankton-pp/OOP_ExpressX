@@ -19,7 +19,6 @@ public class Deliver extends Thread{
     @Override
     public void run() {
         for (int hello = 0; hello<5; hello++ ) {
-            System.out.println(hello+1);
             if(type.equals("N")){
                 try {
                     sleep(5000);
@@ -27,6 +26,7 @@ public class Deliver extends Thread{
                     e.printStackTrace();
                 }
             }
+            System.out.println(hello+1);
             Connection con = null;
             ResultSet rs;
             try {
@@ -118,6 +118,11 @@ public class Deliver extends Thread{
                     LocalTime now = LocalTime.now();
                     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
                     for (int i = 0; i < id.length; i++) {
+                        try {
+                            sleep(5000/(hello+1));
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                         System.out.println("Update:" + nexDate[i] + "->" + date);
                         //UPDATE `status` SET `status`='Picked up' WHERE transport_id='E1';
                         String sqlUpdate = null;
@@ -128,14 +133,18 @@ public class Deliver extends Thread{
                                 sqlUpdate = "UPDATE `status` SET `status`='" + nex[i] + "',`"
                                         + nexDate[i] + "`='" + date + "',`"
                                         + nexTime[i] + "`='" + cur + "' WHERE transport_id='" + id[i] + "';";
-                                values = "'"+id[i]+"','"+nex[i]+"','"+cur+"'";
+                                values = "'"+id[i]+" has been changed to "+nex[i]+" :"+cur+"'";
+                                //"INSERT INTO `transport_detail`(`package_id`
+                                String sqlInsert="INSERT INTO `updatedb`(`dashboard`)VALUES("+values+");";
+                                System.out.println(sqlInsert);
+                                st.executeUpdate(sqlInsert);
                             }
                         }
                         catch(NullPointerException npe){
                             continue;
                         }
+
                         st.executeUpdate(sqlUpdate);
-                        st.executeUpdate("INSERT INTO updatedb('transport_id','status','time') VALUES("+values+");");
                     }
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();

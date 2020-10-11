@@ -8,7 +8,7 @@ import java.sql.*;
 
 public class Carry {
     private JFrame frame;
-    private JTextField status;
+    private JTextArea status;
 
     /**
      * Launch the application.
@@ -51,11 +51,7 @@ public class Carry {
         btn_send.setBounds(98, 209, 123, 42);
         frame.getContentPane().add(btn_send);
 
-        status = new JTextField();
-        status.setEditable(false);
-        status.setBounds(314, 65, 264, 293);
-        frame.getContentPane().add(status);
-        status.setColumns(10);
+        status = new JTextArea();
 
         JButton btn_back = new JButton("Back");
         btn_back.setBounds(374, 386, 89, 23);
@@ -69,6 +65,13 @@ public class Carry {
         lblCarryOutDelivery.setFont(new Font("Tahoma", Font.PLAIN, 16));
         lblCarryOutDelivery.setBounds(233, 26, 146, 20);
         frame.getContentPane().add(lblCarryOutDelivery);
+
+        JScrollPane scroll = new JScrollPane (status,
+                JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+        status.setEditable(false);
+        scroll.setBounds(314, 65, 264, 293);
+        frame.getContentPane().add(scroll);
+        status.setColumns(10);
 
         btn_send.addActionListener(new ActionListener() {
             @Override
@@ -105,20 +108,20 @@ public class Carry {
                                 if(con!=null){
                                     System.out.println("Connected From updateDB");
                                 }
-                                rs = st.executeQuery("select * from updatedb;");
-                                ResultSet finalRs = rs;
+
+                                long i=0;
                                 for (;;){
                                     try{
+                                        rs = st.executeQuery("select * from updatedb;");
                                         String line = "";
-                                        while (finalRs.next()){
-                                            line += finalRs.getString("transport_id")+" has been changed to"+finalRs.getString("status")+" :"
-                                                    +finalRs.getString("time")+"\n";
+                                        while (rs.next()){
+                                            line += rs.getString("dashboard")+"\n";
                                         }
-                                        status.setText(line);
-                                        st.executeUpdate("DELETE FROM updatedb;");
+                                        status.append(line);
                                     }catch (SQLException sqle2){
 
                                     }
+                                    i++;
                                 }
 
                             }catch (SQLException sqle){
@@ -132,6 +135,7 @@ public class Carry {
                     }
 
                 };
+                anouce.start();
             }
         });
         btn_quit.addActionListener(new ActionListener() {

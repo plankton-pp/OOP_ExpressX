@@ -389,6 +389,12 @@ public class Order {
 				btnQuit.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						frame.dispose();
+						try {
+							st.close();
+							con.close();
+						} catch (SQLException throwables) {
+							throwables.printStackTrace();
+						}
 					}
 				});
 				frame.getContentPane().add(btnQuit);
@@ -428,20 +434,20 @@ public class Order {
 				cb_boxSize.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						switch (cb_boxSize.getSelectedItem().toString()){
-							case "Mini":t_volume.setText(width[size.indexOf(cb_boxSize.getSelectedItem().toString().toLowerCase())]+" x "
+						switch (cb_boxSize.getSelectedItem().toString().toLowerCase()){
+							case "mini":t_volume.setText(width[size.indexOf(cb_boxSize.getSelectedItem().toString().toLowerCase())]+" x "
 									+height[size.indexOf(cb_boxSize.getSelectedItem().toString().toLowerCase())]
 									+" x "+depth[size.indexOf(cb_boxSize.getSelectedItem().toString().toLowerCase())]);break;
-							case "S":t_volume.setText(width[size.indexOf(cb_boxSize.getSelectedItem().toString().toLowerCase())]+" x "
+							case "s":t_volume.setText(width[size.indexOf(cb_boxSize.getSelectedItem().toString().toLowerCase())]+" x "
 									+height[size.indexOf(cb_boxSize.getSelectedItem().toString().toLowerCase())]
 									+" x "+depth[size.indexOf(cb_boxSize.getSelectedItem().toString().toLowerCase())]);break;
-							case "M":t_volume.setText(width[size.indexOf(cb_boxSize.getSelectedItem().toString().toLowerCase())]+" x "
+							case "m":t_volume.setText(width[size.indexOf(cb_boxSize.getSelectedItem().toString().toLowerCase())]+" x "
 									+height[size.indexOf(cb_boxSize.getSelectedItem().toString().toLowerCase())]
 									+" x "+depth[size.indexOf(cb_boxSize.getSelectedItem().toString().toLowerCase())]);break;
-							case "L":t_volume.setText(width[size.indexOf(cb_boxSize.getSelectedItem().toString().toLowerCase())]+" x "
+							case "l":t_volume.setText(width[size.indexOf(cb_boxSize.getSelectedItem().toString().toLowerCase())]+" x "
 									+height[size.indexOf(cb_boxSize.getSelectedItem().toString().toLowerCase())]
 									+" x "+depth[size.indexOf(cb_boxSize.getSelectedItem().toString().toLowerCase())]);break;
-							case "XL":t_volume.setText(width[size.indexOf(cb_boxSize.getSelectedItem().toString().toLowerCase())]+" x "
+							case "xl":t_volume.setText(width[size.indexOf(cb_boxSize.getSelectedItem().toString().toLowerCase())]+" x "
 									+height[size.indexOf(cb_boxSize.getSelectedItem().toString().toLowerCase())]
 									+" x "+depth[size.indexOf(cb_boxSize.getSelectedItem().toString().toLowerCase())]);break;
 							default:t_volume.setText(null);break;
@@ -453,7 +459,18 @@ public class Order {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						if(!t_weight.getText().equals("")){
-							t_price.setText(t_weight.getText());
+
+							EvaluateSize esize = new EvaluateSize(cb_boxSize.getSelectedItem().toString());
+							EvaluateType etype = new EvaluateType(cb_Type.getSelectedIndex());
+							EvaluateWeight eweight = new EvaluateWeight(Double.parseDouble(t_weight.getText()));
+
+							//SET SUMMARY PRICE: From GET METHOD
+							SumPrice sum = new SumPrice();
+							sum.setPriceOfSize(esize.getPrice());
+							sum.setPriceWeight(eweight.getPriceOfWeight());
+							sum.setPriceofType(etype.getPriceOfType());
+
+							t_price.setText(String.format("%.2f",sum.getTotalPrice()));
 						}else {
 							t_price.setText("");
 						}

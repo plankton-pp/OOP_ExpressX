@@ -13,6 +13,7 @@ public class ClearDB {
             st.executeUpdate("DELETE From transport_detail;");
             st.executeUpdate("DELETE From transport;");
             st.executeUpdate("DELETE From status;");
+            st.executeUpdate("DELETE From updatedb;");
         }catch (Exception e){
             e.printStackTrace();
         }
