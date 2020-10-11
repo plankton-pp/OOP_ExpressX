@@ -148,5 +148,13 @@ public class Carry {
                 frame.dispose();
             }
         });
+        btn_back.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.dispose();
+                Home h = new Home();
+                h.main();
+            }
+        });
     }
 }

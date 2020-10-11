@@ -82,6 +82,7 @@ public class Home {
             public void actionPerformed(ActionEvent e) {
                 Order order = new Order();
                 order.sendingForm();
+                frame.dispose();
             }
         });
         btnTracking.addActionListener(new ActionListener() {
@@ -89,6 +90,7 @@ public class Home {
             public void actionPerformed(ActionEvent e) {
                 CustomerTracking ct = new CustomerTracking();
                 ct.Check();
+                frame.dispose();
             }
         });
         btnDeliver.addActionListener(new ActionListener() {
@@ -96,6 +98,7 @@ public class Home {
             public void actionPerformed(ActionEvent e) {
                 Carry carry = new Carry();
                 carry.Delivery();
+                frame.dispose();
             }
         });
     }
