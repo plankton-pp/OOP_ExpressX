@@ -16,11 +16,11 @@ public class Home {
     /**
      * Launch the application.
      */
-    public static void main(String[] args) {
+    public void run() {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    Home window = new Home();
+                    Home window = new Home("start");
                     window.frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -32,7 +32,8 @@ public class Home {
     /**
      * Create the application.
      */
-    public Home() {
+    public Home(){}
+    public Home(String start) {
         initialize();
     }
 
@@ -99,6 +100,12 @@ public class Home {
                 Carry carry = new Carry();
                 carry.Delivery();
                 frame.dispose();
+            }
+        });
+        btnQuit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
             }
         });
     }

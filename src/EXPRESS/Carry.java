@@ -152,8 +152,8 @@ public class Carry {
             @Override
             public void actionPerformed(ActionEvent e) {
                 frame.dispose();
-                Home h = new Home();
-                h.main();
+                Home home = new Home();
+                home.run();
             }
         });
     }

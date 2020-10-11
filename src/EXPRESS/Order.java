@@ -384,9 +384,9 @@ public class Order {
 				btnAdd.setBounds(458, 555, 89, 23);
 				frame.getContentPane().add(btnAdd);
 
-				JButton btnQuit = new JButton("Quit");
-				btnQuit.setBounds(663, 555, 77, 23);
-				btnQuit.addActionListener(new ActionListener() {
+				JButton btnBack = new JButton("Back");
+				btnBack.setBounds(663, 555, 77, 23);
+				btnBack.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						frame.dispose();
 						try {
@@ -395,9 +395,11 @@ public class Order {
 						} catch (SQLException throwables) {
 							throwables.printStackTrace();
 						}
+						Home home = new Home();
+						home.run();
 					}
 				});
-				frame.getContentPane().add(btnQuit);
+				frame.getContentPane().add(btnBack);
 
 				JLabel lblId = new JLabel("ID");
 				lblId.setBounds(67, 75, 30, 14);

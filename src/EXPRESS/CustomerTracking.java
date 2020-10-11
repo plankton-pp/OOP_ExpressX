@@ -193,6 +193,7 @@ public class CustomerTracking {
 		btnQuit.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
 				frame.dispose();
 			}
 		});
@@ -236,6 +237,15 @@ public class CustomerTracking {
 					JOptionPane.showMessageDialog(new JFrame(),"Searching Not Found\nPlease Check Your Tracking No And Try Again","Searching",JOptionPane.OK_OPTION);
 				}
 
+			}
+		});
+
+		btnBack.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				frame.dispose();
+				Home home = new Home();
+				home.run();
 			}
 		});
 	}
