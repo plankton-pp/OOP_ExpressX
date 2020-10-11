@@ -65,7 +65,7 @@ public class Order {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		String[] boxSize ={"","Mini","S","M","L","XL"};
+		String[] boxSize ={"","mini","S","M","L","XL"};
 		Connection con;
 		Statement st;
 		ResultSet rs;
@@ -268,7 +268,18 @@ public class Order {
 						//Check Price
 						try{
 							Integer.parseInt(t_weight.getText());
-							t_price.setText(t_weight.getText());
+							//Cal Price by DATA_TYPE
+							EvaluateSize esize = new EvaluateSize(cb_boxSize.getSelectedItem().toString());
+							EvaluateType etype = new EvaluateType(cb_Type.getSelectedIndex());
+							EvaluateWeight eweight = new EvaluateWeight(Double.parseDouble(t_weight.getText()));
+
+							//SET SUMMARY PRICE: From GET METHOD
+							SumPrice sum = new SumPrice();
+							sum.setPriceOfSize(esize.getPrice());
+							sum.setPriceWeight(eweight.getPriceOfWeight());
+							sum.setPriceofType(etype.getPriceOfType());
+
+							t_price.setText(String.format("%.2f",sum.getTotalPrice()));
 						}catch (NumberFormatException nfe){
 							JOptionPane.showMessageDialog(frame,"Invalid Type of Weight !","Warning",JOptionPane.WARNING_MESSAGE);
 							t_price.setText(null);
@@ -276,10 +287,8 @@ public class Order {
 
 
 							if(t_price.getText().equals("")==true){
-								System.out.println("Price <null> : "+t_price.getText());
 								JOptionPane.showMessageDialog(frame,"Invalid Weight !","Warning",JOptionPane.WARNING_MESSAGE);
 							}else {
-								System.out.println("Price <not null> : " + t_price.getText());
 								if (cb_boxSize.getSelectedIndex() == 0) {
 									JOptionPane.showMessageDialog(frame, "Invalid Size of Box !", "Warning", JOptionPane.WARNING_MESSAGE);
 								} else {
