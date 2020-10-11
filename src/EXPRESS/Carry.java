@@ -74,9 +74,64 @@ public class Carry {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(type.getSelectedItem().toString().contains("Both")){
-                    Deliver dv1 = new Deliver("E");
-                    //Deliver dv2 = new Deliver("N");
+                    System.out.println(type.getSelectedItem().toString());
+                    Deliver del1 = new Deliver("N");
+                    Deliver del2 = new Deliver("E");
+                    del1.start();
+                    del2.start();
+                }else{
+                    String check = type.getSelectedItem().toString();
+                    System.out.println(check);
+                    if(check.contains("Normal")){
+                        Deliver del1 = new Deliver("N");
+                        del1.start();
+                    }else{
+                        Deliver del1 = new Deliver("E");
+                        del1.start();
+                    }
                 }
+                Thread anouce = new Thread(){
+                    @Override
+                    public void run() {
+
+                        Connection con = null;
+                        Statement st;
+                        ResultSet rs=null;
+                        try{
+                            try{
+                                Class.forName("com.mysql.jdbc.Driver");
+                                con = DriverManager.getConnection("jdbc:mysql://localhost/OOPExpress","root","");
+                                st = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
+                                if(con!=null){
+                                    System.out.println("Connected From updateDB");
+                                }
+                                rs = st.executeQuery("select * from updatedb;");
+                                ResultSet finalRs = rs;
+                                for (;;){
+                                    try{
+                                        String line = "";
+                                        while (finalRs.next()){
+                                            line += finalRs.getString("transport_id")+" has been changed to"+finalRs.getString("status")+" :"
+                                                    +finalRs.getString("time")+"\n";
+                                        }
+                                        status.setText(line);
+                                        st.executeUpdate("DELETE FROM updatedb;");
+                                    }catch (SQLException sqle2){
+
+                                    }
+                                }
+
+                            }catch (SQLException sqle){
+                                JOptionPane.showMessageDialog(new JFrame(),"Query Fail","Alert From Carry",JOptionPane.WARNING_MESSAGE);
+                                sqle.printStackTrace();
+                            }
+                        }catch(Exception ec){
+                            ec.printStackTrace();
+                        }
+
+                    }
+
+                };
             }
         });
         btn_quit.addActionListener(new ActionListener() {

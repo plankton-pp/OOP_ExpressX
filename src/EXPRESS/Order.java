@@ -167,9 +167,6 @@ public class Order {
 				int day = calen.get(Calendar.DAY_OF_MONTH);
 				int mon = calen.get(Calendar.MONTH)+1;
 				int year = calen.get(Calendar.YEAR);
-				int hr = calen.get(Calendar.HOUR);
-				int min = calen.get(Calendar.MINUTE);
-				int sec = calen.get(Calendar.HOUR);
 				String month = getMonth(mon);
 				t_date.setText(day+" "+month+" "+year);
 				frame.getContentPane().add(t_date);
