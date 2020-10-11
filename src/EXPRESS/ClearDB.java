@@ -3,7 +3,7 @@ package EXPRESS;
 import java.sql.*;
 
 public class ClearDB {
-    public static void main(String args[]){
+    public void Clear(){
         Connection con = null;
         ResultSet rs = null;
         try{

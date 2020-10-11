@@ -2,12 +2,12 @@ package EXPRESS;
 
 import java.awt.EventQueue;
 
-import javax.swing.JFrame;
-import javax.swing.JButton;
-import javax.swing.JLabel;
+import javax.swing.*;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 public class Home {
 
@@ -44,6 +44,7 @@ public class Home {
         frame = new JFrame();
         frame.setBounds(100, 100, 448, 408);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLocationRelativeTo(null);
         frame.getContentPane().setLayout(null);
 
         JButton btnNewDeliver = new JButton("New Deliver");
@@ -78,6 +79,46 @@ public class Home {
         JLabel pic3 = new JLabel("pic3");
         pic3.setBounds(90, 244, 46, 14);
         frame.getContentPane().add(pic3);
+
+
+        JLabel lblBinIcon = new JLabel(new ImageIcon("../OOP_EXPRESS/src/images/garbage.png"));
+        lblBinIcon.setBounds(23, 306, 46, 46);
+        frame.getContentPane().add(lblBinIcon);
+
+        JLabel lblDeleteDatabase = new JLabel("Clear Database");
+        lblDeleteDatabase.setBounds(79, 326, 99, 14);
+        frame.getContentPane().add(lblDeleteDatabase);
+
+        lblBinIcon.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                lblBinIcon.setIcon(new ImageIcon("../OOP_EXPRESS/src/images/garbage.png"));
+                ClearDB db = new ClearDB();
+                db.Clear();
+                JOptionPane.showMessageDialog(new JFrame(),"DataBase Has Been Cleaned up !","DB: Alert",JOptionPane.PLAIN_MESSAGE);
+
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                lblBinIcon.setIcon(new ImageIcon("../OOP_EXPRESS/src/images/garbage.png"));
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                lblBinIcon.setIcon(new ImageIcon("../OOP_EXPRESS/src/images/garbageBig.png"));
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                lblBinIcon.setIcon(new ImageIcon("../OOP_EXPRESS/src/images/garbage.png"));
+            }
+        });
+
         btnNewDeliver.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
