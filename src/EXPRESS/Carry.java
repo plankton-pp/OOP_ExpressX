@@ -5,6 +5,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Carry {
     private JFrame frame;
@@ -39,6 +41,7 @@ public class Carry {
      */
     private void initialize() {
         frame = new JFrame();
+        frame.setLocationRelativeTo(null);
         frame.setBounds(100, 100, 643, 480);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(null);
@@ -114,19 +117,25 @@ public class Carry {
                                 }
 
                                 long i=0;
-                                for (;;){
+                                rs = st.executeQuery("select * from updatedb;");
+                                for (;i<600000;){
+
+                                    sleep(3000);
                                     try{
                                         rs = st.executeQuery("select * from updatedb;");
-                                        String line = "";
-                                        while (rs.next()){
-                                            line += rs.getString("dashboard")+"\n";
-                                        }
-                                        status.append(line);
+                                            String line = "";
+                                            while (rs.next()){
+                                                line += rs.getString("dashboard")+"\n";
+                                            }
+                                            status.setText(null);
+                                            status.append(line);
+
                                     }catch (SQLException sqle2){
 
                                     }
                                     i++;
                                 }
+                                st.executeUpdate("DELETE From updatedb;");
 
                             }catch (SQLException sqle){
                                 JOptionPane.showMessageDialog(new JFrame(),"Query Fail","Alert From Carry",JOptionPane.WARNING_MESSAGE);

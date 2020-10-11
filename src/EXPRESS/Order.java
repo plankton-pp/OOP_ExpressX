@@ -87,6 +87,7 @@ public class Order {
 				}
 
 				frame = new JFrame();
+				frame.setLocationRelativeTo(null);
 				frame.setBounds(100, 100, 800, 660);
 				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				frame.getContentPane().setLayout(null);

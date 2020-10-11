@@ -18,7 +18,7 @@ public class Deliver extends Thread{
 
     @Override
     public void run() {
-        for (int hello = 0; hello<5; hello++ ) {
+        for (int hello = 0; hello<4; hello++ ) {
             if(type.equals("N")){
                 try {
                     sleep(5000);

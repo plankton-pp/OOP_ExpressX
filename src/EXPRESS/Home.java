@@ -68,16 +68,16 @@ public class Home {
         lblOopExpress.setBounds(166, 43, 126, 23);
         frame.getContentPane().add(lblOopExpress);
 
-        JLabel pic1 = new JLabel("pic1");
-        pic1.setBounds(90, 119, 46, 14);
+        JLabel pic1 = new JLabel(new ImageIcon("../OOP_EXPRESS/src/images/new.png"));
+        pic1.setBounds(90, 99, 64, 64);
         frame.getContentPane().add(pic1);
 
-        JLabel pic2 = new JLabel("pic2");
-        pic2.setBounds(90, 184, 46, 14);
+        JLabel pic2 = new JLabel(new ImageIcon("../OOP_EXPRESS/src/images/location.png"));
+        pic2.setBounds(90, 164, 64, 64);
         frame.getContentPane().add(pic2);
 
-        JLabel pic3 = new JLabel("pic3");
-        pic3.setBounds(90, 244, 46, 14);
+        JLabel pic3 = new JLabel(new ImageIcon("../OOP_EXPRESS/src/images/delivery.png"));
+        pic3.setBounds(90, 224, 64, 64);
         frame.getContentPane().add(pic3);
 
 

@@ -49,6 +49,7 @@ public class CustomerTracking {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.setLocationRelativeTo(null);
 		frame.getContentPane().setBackground(Color.WHITE);
 		frame.setBounds(100, 100, 817, 561);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
