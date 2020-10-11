@@ -11,7 +11,7 @@ import java.util.Arrays;
 public class Carry {
     private JFrame frame;
     private JTextArea status;
-
+    private JComboBox type;
     /**
      * Launch the application.
      */
@@ -47,7 +47,7 @@ public class Carry {
         frame.getContentPane().setLayout(null);
 
         String[] transport_type = {"Both (E & N)","Emergency Packages","Normal Packages"};
-        JComboBox type = new JComboBox(transport_type);
+        type = new JComboBox(transport_type);
         type.setBounds(88, 137, 146, 23);
         frame.getContentPane().add(type);
 
@@ -112,14 +112,13 @@ public class Carry {
                                 Class.forName("com.mysql.jdbc.Driver");
                                 con = DriverManager.getConnection("jdbc:mysql://localhost/OOPExpress","root","");
                                 st = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
-                                if(con!=null){
+                                if(con.equals(null)){
                                     System.out.println("Connected From updateDB");
                                 }
 
                                 long i=0;
                                 rs = st.executeQuery("select * from updatedb;");
-                                for (;i<600000;){
-
+                                while (i<600000) {
                                     sleep(3000);
                                     try{
                                         rs = st.executeQuery("select * from updatedb;");
@@ -131,7 +130,7 @@ public class Carry {
                                             status.append(line);
 
                                     }catch (SQLException sqle2){
-
+                                        sqle2.printStackTrace();
                                     }
                                     i++;
                                 }
