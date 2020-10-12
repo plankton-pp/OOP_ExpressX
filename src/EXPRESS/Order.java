@@ -87,9 +87,10 @@ public class Order{
 				}
 
 				frame = new JFrame();
-				frame.setLocationRelativeTo(null);
+				frame.setResizable(false);
 				frame.setBounds(100, 100, 800, 660);
 				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				frame.setLocationRelativeTo(null);
 				frame.getContentPane().setLayout(null);
 
 				JLabel lblOopExpress = new JLabel("OOP EXPRESS");

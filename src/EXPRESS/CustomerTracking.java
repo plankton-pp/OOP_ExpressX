@@ -49,10 +49,11 @@ public class CustomerTracking{
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setLocationRelativeTo(null);
+		frame.setResizable(false);
 		frame.getContentPane().setBackground(Color.WHITE);
 		frame.setBounds(100, 100, 817, 561);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setLocationRelativeTo(null);
 		frame.getContentPane().setLayout(null);
 
 		JLabel lblSendingStatus = new JLabel("SENDING STATUS");
@@ -170,7 +171,7 @@ public class CustomerTracking{
 
 		Icon deliverP = new ImageIcon("../OOP_EXPRESS/src/images/deliver_ConvertImage.png");
 		JLabel lbl_deliverP = new JLabel(deliverP);
-		lbl_deliverP.setBounds(307, 135, 64, 64);
+		lbl_deliverP.setBounds(307, 140, 64, 64);
 		frame.getContentPane().add(lbl_deliverP);
 
 		Icon sendP = new ImageIcon("../OOP_EXPRESS/src/images/send_ConvertImage.png");

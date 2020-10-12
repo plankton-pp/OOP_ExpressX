@@ -44,7 +44,7 @@ public class Home extends ClearDB{
     private void initialize() {
         frame = new JFrame();
         frame.setResizable(false);
-        frame.setBounds(100, 100, 448, 408);
+        frame.setBounds(100, 100, 450, 410);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.getContentPane().setLayout(null);

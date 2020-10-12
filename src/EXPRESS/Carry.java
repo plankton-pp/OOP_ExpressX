@@ -41,9 +41,10 @@ public class Carry {
      */
     private void initialize() {
         frame = new JFrame();
-        frame.setLocationRelativeTo(null);
+        frame.setResizable(false);
         frame.setBounds(100, 100, 643, 480);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLocationRelativeTo(null);
         frame.getContentPane().setLayout(null);
 
         String[] transport_type = {"Both (E & N)","Emergency Packages","Normal Packages"};

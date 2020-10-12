@@ -7,7 +7,7 @@ public class ClearDB {
         ClearUPDATE();
     }
     public ClearDB(String key){
-        if(!key.contains("clearall")){
+        if(key.contains("clearall")){
             Clear();
         }
     }
@@ -27,6 +27,7 @@ public class ClearDB {
         }
     }
     public void ClearUPDATE(){
+        System.out.println("Clear DB:Table 'updatedb' already has cleaned up! ");
         Connection con = null;
         ResultSet rs = null;
         try{
