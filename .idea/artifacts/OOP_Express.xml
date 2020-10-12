@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="javafx" name="OOP_Express">
+    <output-path>$PROJECT_DIR$/out/artifacts/OOP_Express</output-path>
+    <root id="root">
+      <element id="archive" name="OOP_Express.jar">
+        <element id="module-output" name="OOP_Express" />
+      </element>
+    </root>
+  </artifact>
+</component>

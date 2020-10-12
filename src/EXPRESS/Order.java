@@ -195,8 +195,8 @@ public class Order{
 				cb_Type.setBounds(534, 404, 113, 27);
 				frame.getContentPane().add(cb_Type);
 
-				JButton btnCancle = new JButton("Cancel");
-				btnCancle.addActionListener(new ActionListener() {
+				JButton btnCancel = new JButton("Cancel");
+				btnCancel.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						t_senderName.setText("");
 						t_senderAddress.setText("");
@@ -206,6 +206,7 @@ public class Order{
 						t_receiverAddress.setText("");
 						t_receiverTel.setText("");
 
+						t_weight.setText("");
 						t_volume.setText("");
 						t_price.setText("");
 						cb_boxSize.setSelectedIndex(0);
@@ -213,8 +214,8 @@ public class Order{
 						t_id.setText(String.format("%d",Integer.parseInt(t_id.getText())));
 					}
 				});
-				btnCancle.setBounds(557, 555, 89, 23);
-				frame.getContentPane().add(btnCancle);
+				btnCancel.setBounds(557, 555, 89, 23);
+				frame.getContentPane().add(btnCancel);
 
 				t_volume = new JTextField();
 				t_volume.setColumns(10);
@@ -263,7 +264,23 @@ public class Order{
 				frame.getContentPane().add(lblPrice);
 
 				clock();
+				t_weight.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						//Cal Price by DATA_TYPE
+						EvaluateSize esize = new EvaluateSize(cb_boxSize.getSelectedItem().toString());
+						EvaluateType etype = new EvaluateType(cb_Type.getSelectedIndex());
+						EvaluateWeight eweight = new EvaluateWeight(Double.parseDouble(t_weight.getText()));
 
+						//SET SUMMARY PRICE: From GET METHOD
+						SumPrice sum = new SumPrice();
+						sum.setPriceOfSize(esize.getPrice());
+						sum.setPriceWeight(eweight.getPriceOfWeight());
+						sum.setPriceofType(etype.getPriceOfType());
+
+						t_price.setText(String.format("%.2f",sum.getTotalPrice()));
+					}
+				});
 				JButton btnAdd = new JButton("Add");
 				btnAdd.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {

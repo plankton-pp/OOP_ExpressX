@@ -222,7 +222,7 @@ public class CustomerTracking{
 
 						switch (data[8]){
 							case "Picked up":lbl_getP.setIcon(new ImageIcon("../OOP_EXPRESS/src/images/package.png"));break;
-							case "Transporting":lbl_getP.setIcon(new ImageIcon("../OOP_EXPRESS/src/images/package.png"));
+							case "Transport":lbl_getP.setIcon(new ImageIcon("../OOP_EXPRESS/src/images/package.png"));
 								lbl_deliverP.setIcon(new ImageIcon("../OOP_EXPRESS/src/images/deliver.png"));
 								break;
 							case "Deliver":lbl_getP.setIcon(new ImageIcon("../OOP_EXPRESS/src/images/package.png"));
@@ -233,6 +233,8 @@ public class CustomerTracking{
 								lbl_deliverP.setIcon(new ImageIcon("../OOP_EXPRESS/src/images/deliver.png"));
 								lbl_sendP.setIcon(new ImageIcon("../OOP_EXPRESS/src/images/send.png"));
 								lbl_receivedP.setIcon(new ImageIcon("../OOP_EXPRESS/src/images/received.png"));break;
+							default:t_status.setText("");t_id.setText("");t_senderName.setText("");tp_senderAddress.setText("");t_senderTel.setText("");
+							t_receiverName.setText("");tp_receiverAddress.setText("");t_receiverTel.setText("");break;
 						}
 					}
 				}catch (ArrayIndexOutOfBoundsException aobe){
