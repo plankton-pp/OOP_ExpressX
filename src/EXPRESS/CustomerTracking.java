@@ -220,22 +220,33 @@ public class CustomerTracking{
 						tp_receiverAddress.setText(data[14]);
 						t_receiverTel.setText(data[15]);
 
-						switch (data[8]){
-							case "Picked up":lbl_getP.setIcon(new ImageIcon("../OOP_EXPRESS/src/images/package.png"));break;
-							case "Transport":lbl_getP.setIcon(new ImageIcon("../OOP_EXPRESS/src/images/package.png"));
-								lbl_deliverP.setIcon(new ImageIcon("../OOP_EXPRESS/src/images/deliver.png"));
-								break;
-							case "Deliver":lbl_getP.setIcon(new ImageIcon("../OOP_EXPRESS/src/images/package.png"));
-								lbl_deliverP.setIcon(new ImageIcon("../OOP_EXPRESS/src/images/deliver.png"));
-								lbl_sendP.setIcon(new ImageIcon("../OOP_EXPRESS/src/images/send.png"));
-								break;
-							case "Received":lbl_getP.setIcon(new ImageIcon("../OOP_EXPRESS/src/images/package.png"));
-								lbl_deliverP.setIcon(new ImageIcon("../OOP_EXPRESS/src/images/deliver.png"));
-								lbl_sendP.setIcon(new ImageIcon("../OOP_EXPRESS/src/images/send.png"));
-								lbl_receivedP.setIcon(new ImageIcon("../OOP_EXPRESS/src/images/received.png"));break;
-							default:t_status.setText("");t_id.setText("");t_senderName.setText("");tp_senderAddress.setText("");t_senderTel.setText("");
-							t_receiverName.setText("");tp_receiverAddress.setText("");t_receiverTel.setText("");break;
+							switch (data[8]){
+								case "Picked up":lbl_getP.setIcon(new ImageIcon("../OOP_EXPRESS/src/images/package.png"));break;
+								case "Transport":lbl_getP.setIcon(new ImageIcon("../OOP_EXPRESS/src/images/package.png"));
+									lbl_deliverP.setIcon(new ImageIcon("../OOP_EXPRESS/src/images/deliver.png"));
+									break;
+								case "Deliver":lbl_getP.setIcon(new ImageIcon("../OOP_EXPRESS/src/images/package.png"));
+									lbl_deliverP.setIcon(new ImageIcon("../OOP_EXPRESS/src/images/deliver.png"));
+									lbl_sendP.setIcon(new ImageIcon("../OOP_EXPRESS/src/images/send.png"));
+									break;
+								case "Received":lbl_getP.setIcon(new ImageIcon("../OOP_EXPRESS/src/images/package.png"));
+									lbl_deliverP.setIcon(new ImageIcon("../OOP_EXPRESS/src/images/deliver.png"));
+									lbl_sendP.setIcon(new ImageIcon("../OOP_EXPRESS/src/images/send.png"));
+									lbl_receivedP.setIcon(new ImageIcon("../OOP_EXPRESS/src/images/received.png"));break;
 						}
+					}else{
+						lbl_getP.setIcon(new ImageIcon("../OOP_EXPRESS/src/images/package_ConvertImage.png"));
+						lbl_deliverP.setIcon(new ImageIcon("../OOP_EXPRESS/src/images/deliver_ConvertImage.png"));
+						lbl_sendP.setIcon(new ImageIcon("../OOP_EXPRESS/src/images/send_ConvertImage.png"));
+						lbl_receivedP.setIcon(new ImageIcon("../OOP_EXPRESS/src/images/received_ConvertImage.png"));
+						t_status.setText("");
+						t_id.setText("");
+						t_senderName.setText("");
+						tp_senderAddress.setText("");
+						t_senderTel.setText("");
+						t_receiverName.setText("");
+						tp_receiverAddress.setText("");
+						t_receiverTel.setText("");
 					}
 				}catch (ArrayIndexOutOfBoundsException aobe){
 					JOptionPane.showMessageDialog(new JFrame(),"Searching Not Found\nPlease Check Your Tracking No And Try Again","Searching",JOptionPane.OK_OPTION);
