@@ -1,4 +1,4 @@
-package EXPRESS;
+package B6123338_B6122997_B6121921;
 
 public class EvaluateWeight {
     double weight, priceOfVolume = 0;

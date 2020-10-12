@@ -1,4 +1,4 @@
-package EXPRESS;
+package B6123338_B6122997_B6121921;
 
 public class EvaluateType {
     double priceOfType = 0;
